@@ -3,11 +3,11 @@ require 'spec_helper'
 # <%= options.inspect %>
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
-describe "<%= ns_table_name %>/edit.html.<%= options[:template_engine] %>" do
+describe "<%= ns_table_name %>/edit" do
   before(:each) do
     controller.stub!(:can?).and_return(true)
 <% if options[:fixture_replacement] == :factory_girl -%>
-    @<%= ns_² %> = assign(:<%= ns_file_name %>, create(:<%= ns_file_name %>))
+    @<%= ns_file_name %> = assign(:<%= ns_file_name %>, create(:<%= ns_file_name %>))
 <% else -%>
     @<%= ns_file_name %> = assign(:<%= ns_file_name %>, stub_model(<%= class_name %><%= output_attributes.empty? ? '))' : ',' %>
 <% output_attributes.each_with_index do |attribute, attribute_index| -%>
@@ -27,7 +27,7 @@ describe "<%= ns_table_name %>/edit.html.<%= options[:template_engine] %>" do
 <% end -%>
     end
 <% else -%>
-    assert_select "form", :action => <%= index_helper %>_path(@<%= ns_file_name %>), :method => "post" do
+    assert_select "form[action=?][method=?]", <%= ns_file_name %>_path(@<%= ns_file_name %>), "post" do
 <% for attribute in output_attributes -%>
       assert_select "<%= attribute.input_type -%>#<%= ns_file_name %>_<%= attribute.name %>[name=?]", "<%= ns_file_name %>[<%= attribute.name %>]"
 <% end -%>

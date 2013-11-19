@@ -1,5 +1,6 @@
 require 'spec_helper'
 
+<% module_namespacing do -%>
 describe <%= class_name %> do
 
 <% if options[:fixture_replacement] == :factory_girl -%>
@@ -18,3 +19,4 @@ describe <%= class_name %> do
 <% end -%>
 
 end
+<% end -%>

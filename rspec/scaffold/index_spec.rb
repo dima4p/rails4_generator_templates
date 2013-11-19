@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
-describe "<%= ns_table_name %>/index.html.<%= options[:template_engine] %>" do
+describe "<%= ns_table_name %>/index" do
   before(:each) do
     controller.stub!(:can?).and_return(true)
 <% if options[:fixture_replacement] == :factory_girl -%>
@@ -19,7 +19,7 @@ describe "<%= ns_table_name %>/index.html.<%= options[:template_engine] %>" do
       <%= model_index == 1 ? ')' : '),' %>
 <% end -%>
 <% end -%>
-    ]
+    ] #)
 <% end -%>
     <%= class_name %>.should_receive(:page).and_return(result_set)
     result_set.should_receive(:per).and_return(result_set)

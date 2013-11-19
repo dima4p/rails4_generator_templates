@@ -1,4 +1,4 @@
-## Tamplates for Rails 3 Generator
+## Tamplates for Rails 4 Generator
 
 This set of templates has the following changes:
 
@@ -12,11 +12,11 @@ This set of templates has the following changes:
 
 1. Either 
 
-        git clone https://github.com/dima4p/rails3_generator_templates.git lib/templates
+        git clone https://github.com/dima4p/rails4_generator_templates.git lib/templates
 
     ...or...
 
-        git submodule add https://github.com/dima4p/rails3_generator_templates.git lib/templates
+        git submodule add https://github.com/dima4p/rails4_generator_templates.git lib/templates
   
 2. Create stuff with:
 

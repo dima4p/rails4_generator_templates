@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
-describe "<%= ns_table_name %>/show.html.<%= options[:template_engine] %>" do
+describe "<%= ns_table_name %>/show" do
   before(:each) do
     controller.stub!(:can?).and_return(true)
 <% if options[:fixture_replacement] == :factory_girl -%>
