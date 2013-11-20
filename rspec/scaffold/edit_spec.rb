@@ -5,7 +5,7 @@ require 'spec_helper'
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
 describe "<%= ns_table_name %>/edit" do
   before(:each) do
-    controller.stub!(:can?).and_return(true)
+    controller.stub(:can?).and_return(true)
 <% if options[:fixture_replacement] == :factory_girl -%>
     @<%= ns_file_name %> = assign(:<%= ns_file_name %>, create(:<%= ns_file_name %>))
 <% else -%>

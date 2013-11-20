@@ -18,7 +18,7 @@ describe <%= controller_class_name %>Controller do
   let(:valid_session) { {} }
 
   before :each do
-    controller.stub!(:current_user).and_return(current_user)
+    controller.stub(:current_user).and_return(current_user)
   end
 
 <% unless options[:singleton] -%>

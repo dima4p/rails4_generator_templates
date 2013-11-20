@@ -3,7 +3,7 @@ require 'spec_helper'
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
 describe "<%= ns_table_name %>/index" do
   before(:each) do
-    controller.stub!(:can?).and_return(true)
+    controller.stub(:can?).and_return(true)
 <% if options[:fixture_replacement] == :factory_girl -%>
     @<%= ns_file_name %> = create(:<%= ns_file_name %>)
     result_set = [@<%= ns_file_name %>, @<%= ns_file_name %>]
