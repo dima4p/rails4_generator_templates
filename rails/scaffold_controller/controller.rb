@@ -11,6 +11,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # GET <%= route_url %>
   def index
     #@<%= plural_table_name %> = <%= orm_class.all(class_name) %>
+    @grid = initialize_grid @<%= plural_table_name %>
   end
 
   # GET <%= route_url %>/1
