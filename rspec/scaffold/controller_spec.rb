@@ -3,7 +3,7 @@ require 'spec_helper'
 <% module_namespacing do -%>
 describe <%= controller_class_name %>Controller do
 
-<% if options[:fixture_replacement] == :factory_girl -%>
+<% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
   let(:valid_attributes) {FactoryGirl.build(:<%=file_name%>).attributes}
 <% else -%>
   # This should return the minimal set of attributes required to create a valid

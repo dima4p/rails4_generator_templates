@@ -4,7 +4,7 @@ require 'spec_helper'
 describe "<%= ns_table_name %>/new" do
   before(:each) do
     controller.stub(:can?).and_return(true)
-<% if options[:fixture_replacement] == :factory_girl -%>
+<% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
     @<%= ns_file_name %> = assign(:<%= ns_file_name %>, build(:<%= ns_file_name %>))
   end
 <% else -%>
