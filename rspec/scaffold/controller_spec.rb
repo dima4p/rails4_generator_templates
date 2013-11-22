@@ -3,12 +3,12 @@ require 'spec_helper'
 <% module_namespacing do -%>
 describe <%= controller_class_name %>Controller do
 
-<% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
-  let(:valid_attributes) {FactoryGirl.build(:<%=file_name%>).attributes}
-<% else -%>
   # This should return the minimal set of attributes required to create a valid
   # <%= class_name %>. As you add validations to <%= class_name %>, be sure to
-  # adjust the attributes here as well.
+  # adjust the attributes here as well. The list could not be empty.
+<% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
+  let(:valid_attributes) {FactoryGirl.build(:<%=file_name%>).attributes.slice *%w[name]}
+<% else -%>
   let(:valid_attributes) { <%= formatted_hash(example_valid_attributes) %> }
 <% end -%>
 
