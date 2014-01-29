@@ -1,7 +1,5 @@
 require 'spec_helper'
 
-# <%= options.inspect %>
-
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
 describe "<%= ns_table_name %>/edit" do
   before(:each) do
