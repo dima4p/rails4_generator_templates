@@ -64,7 +64,7 @@ class <%= controller_class_name %>Controller < ApplicationController
   # DELETE <%= route_url %>/1
   def destroy
     @<%= orm_instance.destroy %>
-    redirect_to <%= index_helper %>_url, notice: t('<%= table_name %>.was_destroyed')
+    redirect_to <%= index_helper %>_url, notice: t('<%= table_name %>.was_deleted')
   end
 
   private
