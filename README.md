@@ -1,4 +1,4 @@
-## Tamplates for Rails 4 Generator
+## Templates for Rails 4 Generator
 
 This set of templates has the following changes:
 
