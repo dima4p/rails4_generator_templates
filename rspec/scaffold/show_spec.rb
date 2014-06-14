@@ -20,9 +20,7 @@ describe "<%= ns_table_name %>/show" do
   it "renders attributes in <p>" do
     render
 <% for attribute in output_attributes -%>
-<% if webrat? -%>
-    rendered.should contain(<%= value_for(attribute) %>.to_s)
-<% elsif Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
+<% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
     rendered.should match(Regexp.new @<%= ns_file_name %>.<%= attribute.name %>.to_s)
 <% else -%>
     rendered.should match(/<%= eval(value_for(attribute)) %>/)

@@ -57,9 +57,7 @@ describe "<%= ns_table_name %>/index" do
     render
 
 <% for attribute in output_attributes -%>
-<% if webrat? -%>
-    rendered.should have_selector("tr>td", :content => <%= value_for(attribute) %>.to_s, :count => 2)
-<% elsif Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
+<% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
     assert_select "tr>td", :text => @<%= ns_file_name %>.<%= attribute.name %>.to_s, :count => 2
 <% else -%>
     assert_select "tr>td", :text => <%= value_for(attribute) %>.to_s, :count => 2
