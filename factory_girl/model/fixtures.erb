@@ -4,7 +4,7 @@ FactoryGirl.define do
 <% if attribute.reference? -%>
     <%= attribute.name %> { create :<%= attribute.name %> }
 <% elsif /\A(.*)_name\z/.match attribute.name -%>
-    sequence(:<%= attribute.name %>) {|n| "<%= class_name %> <%= $1.try :capitalize %> ##{n}" }
+    sequence(:<%= attribute.name %>) {|n| "<%= class_name %>_<%= $1.try :capitalize %>#{n}" }
 <% elsif %[name title].include? attribute.name -%>
     sequence(:<%= attribute.name %>) {|n| "<%= class_name %> ##{n}" }
 <% elsif attribute.name == 'position' -%>
