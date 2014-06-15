@@ -1,4 +1,8 @@
+<% if File.exist?(File.join %w[spec rails_helper.rb]) -%>
+require 'rails_helper'
+<% else -%>
 require 'spec_helper'
+<% end -%>
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
 describe "<%= ns_table_name %>/new", :type => :view do
