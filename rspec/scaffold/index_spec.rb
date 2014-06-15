@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
-describe "<%= ns_table_name %>/index" do
+describe "<%= ns_table_name %>/index", :type => :view do
   before(:each) do
-    controller.stub(:can?).and_return(true)
+    allow(controller).to receive(:can?).and_return(true)
 <% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
     @<%= ns_file_name %> = create(:<%= ns_file_name %>)
 <% if defined? Wice::WiceGrid -%>
@@ -36,19 +36,19 @@ describe "<%= ns_table_name %>/index" do
 <% end -%>
 <% end -%>
 <% if defined? Wice::WiceGrid -%>
-    <%= class_name %>.should_receive(:page).and_return(result_set)
-    result_set.should_receive(:per).and_return(result_set)
-    result_set.should_receive(:includes).and_return(result_set)
-    result_set.should_receive(:joins).and_return(result_set)
-    result_set.should_receive(:order).and_return(result_set)
-    result_set.should_receive(:where).and_return(result_set)
-    result_set.should_receive(:total_count).twice.and_return(result_set.size)
-    result_set.should_receive(:offset_value).and_return(0)
-    result_set.should_receive(:last_page?).and_return(true)
-    result_set.should_receive(:num_pages).and_return(1)
-    result_set.should_receive(:current_page).and_return(1)
-    result_set.should_receive(:total_pages).and_return(1)
-    result_set.should_receive(:limit_value).and_return(1)
+    expect(<%= class_name %>).to receive(:page).and_return(result_set)
+    expect(result_set).to receive(:per).and_return(result_set)
+    expect(result_set).to receive(:includes).and_return(result_set)
+    expect(result_set).to receive(:joins).and_return(result_set)
+    expect(result_set).to receive(:order).and_return(result_set)
+    expect(result_set).to receive(:where).and_return(result_set)
+    expect(result_set).to receive(:total_count).twice.and_return(result_set.size)
+    expect(result_set).to receive(:offset_value).and_return(0)
+    expect(result_set).to receive(:last_page?).and_return(true)
+    expect(result_set).to receive(:num_pages).and_return(1)
+    expect(result_set).to receive(:current_page).and_return(1)
+    expect(result_set).to receive(:total_pages).and_return(1)
+    expect(result_set).to receive(:limit_value).and_return(1)
     assign(:grid, Wice::WiceGrid.new(<%= class_name %>, controller))
 <% end -%>
   end
@@ -58,7 +58,11 @@ describe "<%= ns_table_name %>/index" do
 
 <% for attribute in output_attributes -%>
 <% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
-    assert_select "tr>td", :text => @<%= ns_file_name %>.<%= attribute.name %>.to_s, :count => 2
+<% if attribute.reference? -%>
+    assert_select 'tr>td', text: @<%= ns_file_name %>.<%= attribute.name %>.name, count: 2
+<% else -%>
+    assert_select 'tr>td', text: @<%= ns_file_name %>.<%= attribute.name %>.to_s, count: 2
+<% end -%>
 <% else -%>
     assert_select "tr>td", :text => <%= value_for(attribute) %>.to_s, :count => 2
 <% end -%>

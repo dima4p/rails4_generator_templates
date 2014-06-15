@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 <% output_attributes = attributes.reject{|attribute| [:datetime, :timestamp, :time, :date].index(attribute.type) } -%>
-describe "<%= ns_table_name %>/edit" do
+describe "<%= ns_table_name %>/edit", :type => :view do
   before(:each) do
-    controller.stub(:can?).and_return(true)
+    allow(controller).to receive(:can?).and_return(true)
 <% if Rails.application.config.generators.options[:rails][:fixture_replacement] == :factory_girl -%>
     @<%= ns_file_name %> = assign(:<%= ns_file_name %>, create(:<%= ns_file_name %>))
 <% else -%>
-    @<%= ns_file_name %> = assign(:<%= ns_file_name %>, stub_model(<%= class_name %><%= output_attributes.empty? ? '))' : ',' %>
+    @<%= ns_file_name %> = assign(:<%= ns_file_name %>, <%= class_name %>.create!(<%= '))' if output_attributes.empty? %>
 <% output_attributes.each_with_index do |attribute, attribute_index| -%>
       :<%= attribute.name %> => <%= attribute.default.inspect %><%= attribute_index == output_attributes.length - 1 ? '' : ','%>
 <% end -%>
@@ -20,7 +20,9 @@ describe "<%= ns_table_name %>/edit" do
 
     assert_select "form[action=?][method=?]", <%= ns_file_name %>_path(@<%= ns_file_name %>), "post" do
 <% for attribute in output_attributes -%>
-      assert_select "<%= attribute.input_type -%>#<%= ns_file_name %>_<%= attribute.name %>[name=?]", "<%= ns_file_name %>[<%= attribute.name %>]"
+      <% name = attribute.respond_to?(:column_name) ? attribute.column_name : attribute.name -%>
+      <% input_type = attribute.reference? ? 'select' : attribute.input_type -%>
+      assert_select '<%= input_type -%>#<%= ns_file_name %>_<%= name %>[name=?]', '<%= ns_file_name %>[<%= name %>]'
 <% end -%>
     end
   end
