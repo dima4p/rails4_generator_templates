@@ -18,5 +18,14 @@ describe <%= class_name %> do
   end
 <% end -%>
 
+  describe :class do
+    it 'should respond to :ordered' do
+      <%= singular_name %>1 = create :<%= singular_name %>
+      <%= singular_name %>2 = create :<%= singular_name %>
+      <% attribute = attributes.detect{|a| a.name == 'position'} || attributes.detect{|a| a.name == 'name'} || attributes.detect{|a| a.name == 'title'} || attributes.first -%>
+      expect(<%= class_name %>.ordered).to eq <%= class_name %>.order(:<%=attribute.name %>)
+    end
+  end
+
 end
 <% end -%>
