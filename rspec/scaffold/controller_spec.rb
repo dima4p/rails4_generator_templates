@@ -78,7 +78,7 @@ describe <%= controller_class_name %>Controller, :type => :controller do
 
       it "redirects to the created <%= ns_file_name %>" do
         post :create, {:<%= ns_file_name %> => valid_attributes}, valid_session
-        response.should redirect_to(<%= class_name %>.last)
+        expect(response).to redirect_to(<%= class_name %>.last)
       end
     end
 

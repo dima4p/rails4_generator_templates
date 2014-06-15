@@ -14,7 +14,7 @@ describe <%= class_name %> do
   end
 
   it "should be valid" do
-    <%= class_name %>.new(@valid_attrs).should be_valid
+    expect(<%= class_name %>.new(@valid_attrs)).to be_valid
   end
 <% end -%>
 
