@@ -38,6 +38,7 @@ describe <%= controller_class_name %>Controller, :type => :controller do
     it "assigns all <%= table_name.pluralize %> as @<%= table_name.pluralize %>" do
       <%= file_name %> = <%= class_name %>.create! valid_attributes
       get :index, {}, valid_session
+      expect(assigns(:<%= table_name %>)).to be_kind_of(ActiveRecord::Relation)
       expect(assigns(:<%= table_name %>)).to eq([<%= file_name %>])
     end
   end
@@ -83,6 +84,7 @@ describe <%= controller_class_name %>Controller, :type => :controller do
       it "redirects to the created <%= ns_file_name %>" do
         post :create, {:<%= ns_file_name %> => valid_attributes}, valid_session
         expect(response).to redirect_to(<%= class_name %>.last)
+        # expect(response).to redirect_to(<%= index_helper %>_url)
       end
     end
 

@@ -40,19 +40,19 @@ describe "<%= ns_table_name %>/index", :type => :view do
 <% end -%>
 <% end -%>
 <% if defined? Wice::WiceGrid -%>
-    expect(<%= class_name %>).to receive(:page).and_return(result_set)
-    expect(result_set).to receive(:per).and_return(result_set)
-    expect(result_set).to receive(:includes).and_return(result_set)
-    expect(result_set).to receive(:joins).and_return(result_set)
-    expect(result_set).to receive(:order).and_return(result_set)
-    expect(result_set).to receive(:where).and_return(result_set)
-    expect(result_set).to receive(:total_count).twice.and_return(result_set.size)
-    expect(result_set).to receive(:offset_value).and_return(0)
-    expect(result_set).to receive(:last_page?).and_return(true)
-    expect(result_set).to receive(:num_pages).and_return(1)
-    expect(result_set).to receive(:current_page).and_return(1)
-    expect(result_set).to receive(:total_pages).and_return(1)
-    expect(result_set).to receive(:limit_value).and_return(1)
+    allow(<%= class_name %>).to receive(:page).and_return(result_set)
+    allow(result_set).to receive(:per).and_return(result_set)
+    allow(result_set).to receive(:includes).and_return(result_set)
+    allow(result_set).to receive(:joins).and_return(result_set)
+    allow(result_set).to receive(:order).and_return(result_set)
+    allow(result_set).to receive(:where).and_return(result_set)
+    allow(result_set).to receive(:total_count).twice.and_return(result_set.size)
+    allow(result_set).to receive(:offset_value).and_return(0)
+    allow(result_set).to receive(:last_page?).and_return(true)
+    allow(result_set).to receive(:num_pages).and_return(1)
+    allow(result_set).to receive(:current_page).and_return(1)
+    allow(result_set).to receive(:total_pages).and_return(1)
+    allow(result_set).to receive(:limit_value).and_return(1)
     assign(:grid, Wice::WiceGrid.new(<%= class_name %>, controller))
 <% end -%>
   end
