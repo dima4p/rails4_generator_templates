@@ -2,7 +2,7 @@
 
 The long awaited event at least took place.
 
-I've devided the code into separate parts and created the gems:
+I've divided the code into separate parts and created the gems:
 * https://rubygems.org/gems/active_record_model_and_rspec_enhanced_templates
 * https://rubygems.org/gems/factory_girl_fixtures_template
 * https://rubygems.org/gems/i18n_scaffold_controller_template
